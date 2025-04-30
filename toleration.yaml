@@ -1,21 +1,21 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: taint
+  name: tolerations
   labels:
-    purpose: taint-demo
+    purpose: "tolerations-demo"
 spec:
   nodeSelector:
-    topology.kubernetes.io/zone: us-east-1b # Pod will be scheduled only on nodes in this zone
-  tolerations: # Allow scheduling on nodes with matching taints
-    - key: "hardware"
-      operator: "Equal"
-      value: "gpu"
-      effect: "NoSchedule"
-    - key: "hardware"
-      operator: "Equal"
-      value: "gpu"
-      effect: "NoExecute"
+    topology.kubernetes.io/zone: us-east-1b
   containers:
-    - name: nginx
-      image: nginx
+  - name: nginx
+    image: nginx
+  tolerations:
+  - key: "hardware"
+    operator: "Equal"
+    value: "gpu"
+    effect: "NoSchedule"
+  - key: "hardware"
+    operator: "Equal"
+    value: "gpu"
+    effect: "NoExecute"

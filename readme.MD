@@ -1,7 +1,7 @@
-## selectors 
+## Selectors
 
-taint node 
+taint node
 
 ```
-kubectl taint nodes node1 hardware=gpu:NoSchedule
+kubectl taint nodes ip-192-168-43-212.ec2.internal hardware=gpu:NoSchedule
 ```
