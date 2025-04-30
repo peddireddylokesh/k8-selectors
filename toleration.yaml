@@ -1,4 +1,4 @@
-apiVersion: v1 
+apiVersion: v1
 kind: Pod
 metadata:
   name: taint
@@ -6,16 +6,16 @@ metadata:
     purpose: taint-demo
 spec:
   nodeSelector:
-    topology.kubernetes.io/zone: us-east-1b # you must tell the pod to run in the same zone as the EBS volume otherwise it will not be able to attach continuously it shows containerzed but not running.
+    topology.kubernetes.io/zone: us-east-1b # Pod will be scheduled only on nodes in this zone
+  tolerations: # Allow scheduling on nodes with matching taints
+    - key: "hardware"
+      operator: "Equal"
+      value: "gpu"
+      effect: "NoSchedule"
+    - key: "hardware"
+      operator: "Equal"
+      value: "gpu"
+      effect: "NoExecute"
   containers:
-  - name: nginx
-    image: nginx
-  tolerations: # if i want to svhedule on tainted nodes i should requset for toleratioon then it will allow if the node has taint.
-  - key: "hardware"
-    operator: "Equal"
-    value: "gpu"
-    effect: "NoSchedule"
-  - key: "hardware"
-    operator: "Equal"
-    value: "gpu"
-    effect: "NoExecute"
+    - name: nginx
+      image: nginx
