@@ -1,0 +1,12 @@
+apiVersion: v1 
+kind: Pod
+metadata:
+  name: node-selector
+  labels:
+    purpose: selector-demo
+spec:
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1a # you must tell the pod to run in the same zone as the EBS volume otherwise it will not be able to attach continuously it shows containerzed but not running.
+  containers:
+  - name: nginx
+    image: nginx
